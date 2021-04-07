@@ -1,8 +1,6 @@
 from rest_framework.generics import get_object_or_404
 from rest_framework import serializers
-
 from .models import Comment, Post, Group, Follow, User
-
 
 
 class PostSerializer(serializers.ModelSerializer):
@@ -46,10 +44,10 @@ class FollowSerializer(serializers.ModelSerializer):
             following=user).exists()
         if user == self.context['request'].user:
             raise serializers.ValidationError(
-        "Вы не можете подписаться сами на себя")
+                "Вы не можете подписаться на себя")
         if follow is True:
             raise serializers.ValidationError(
-        "Вы уже подписаны на этого пользователя")
+                "Вы уже подписаны на этого пользователя")
         return data
 
     class Meta:

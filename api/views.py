@@ -18,7 +18,7 @@ class PostViewSet(ModelViewSet):
     serializer_class = PostSerializer
     permission_classes = [IsAuthenticatedOrReadOnly, IsAuthor]
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['group',]    
+    filterset_fields = ['group', ]
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
@@ -46,16 +46,15 @@ class GroupViewSet(ModelViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly]
 
 
-
 class FollowViewSet(ModelViewSet):
     queryset = Follow.objects.all()
     serializer_class = FollowSerializer
     filter_backends = [filters.SearchFilter]
-    search_fields = ['=user__username', '=following__username',]
+    search_fields = ['=user__username', '=following__username', ]
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
-    
+
     def get_queryset(self):
         return Follow.objects.filter(
             following__username=self.request.user
