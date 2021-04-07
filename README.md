@@ -18,7 +18,7 @@ $ python -m venv venv
 ```python
 $ pip install -r requirements.txt
 ```
-4. Создание и применение миграций
+4. Создаем и применяем миграции
 ```python
 $ python manage.py makemigrations
 $ python manage.py migrate
@@ -28,3 +28,12 @@ $ python manage.py migrate
 $ python manage.py runserver
 ```
 Все готово к использованию API.
+## Аутентификация
+Выполните POST-запрос localhost:8000/api/v1/token/, передав поля username и password.
+API вернет JWT-токен в формате:
+```
+{
+    "refresh": "ХХХХХХХХХХХ",
+    "access": "ХХХХХХХХХХХХ"
+}
+```
